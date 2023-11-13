@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import urllib.request
+import subprocess
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from PyQt5.QtGui import QPixmap
@@ -16,9 +17,11 @@ class WorkWin(QMainWindow):
         self.ui.setupUi(self)
         self.ui.dobtn.clicked.connect(self.dodbtn)
 
+
     def dodbtn(self):
         print('жмак')
-        videos = ytb_get_videos_list()
+        print(self.ui.lineEdit.text())
+        videos = ytb_get_videos_list(self.ui.lineEdit.text())
         print(videos)
         print(videos[0]['snippet']['thumbnails']['default']['url'])
         urllib.request.urlretrieve(videos[0]['snippet']['thumbnails']['default']['url'], 'default1.jpg')
@@ -39,10 +42,20 @@ class WorkWin(QMainWindow):
         self.ui.lbl1.adjustSize()
         self.ui.lbl2.adjustSize()
         self.ui.lbl3.adjustSize()
-        #self.ui.thmb1.show()
+        self.ui.lnkbtn1.show()
+        self.ui.lnkbtn2.show()
+        self.ui.lnkbtn3.show()
+        self.ui.lnkbtn1.clicked.connect(lambda: self.viewbtn(vid=videos[0]['id']['videoId']))
+        self.ui.lnkbtn2.clicked.connect(lambda: self.viewbtn(vid=videos[1]['id']['videoId']))
+        self.ui.lnkbtn3.clicked.connect(lambda: self.viewbtn(vid=videos[2]['id']['videoId']))
+        #self.ui.lnkbtn1.clicked.connect(self.viewbtn)
 
+    def viewbtn(self, vid=None):
+        vid = f'https://www.youtube.com/watch?v={vid}'
+        print(f'vewbtn {vid}')
+        cmd = [f'ytdl --print-url "{vid}" | xargs mplayer -volume 80']
+        subprocess.run(cmd, shell=True, stdout=subprocess.PIPE)
 
-    def viewbtn(self):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
