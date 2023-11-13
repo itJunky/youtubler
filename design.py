@@ -1,9 +1,6 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import QCoreApplication, QRect, QMetaObject
-import sys
-from time import sleep
-#from main import dododobtn
 
 
 class MMainWindow(object):  # главное окно
@@ -19,10 +16,6 @@ class MMainWindow(object):  # главное окно
         self.menubar.setGeometry(QRect(0, 0, 785, 25))
         self.menubar.setObjectName("menubar")
         MainWindow.setMenuBar(self.menubar)
-        #self.verticalLayout = QVBoxLayout(self.centralwidget)
-        #self.verticalLayout.setObjectName("verticalLayout")
-        #self.horizontalLayout = QHBoxLayout()
-        #self.horizontalLayout.setObjectName("horizontalLayout")
         self.lbl = QLabel('Начни с поиска видео', self.centralwidget)
         #self.lbl2 = QLabel('<i>Hello</i>, <b>world</b>!!zxcvbnm,./ <s><b>123</b></s>', self)
         self.lbl.move(10, 20)
@@ -36,7 +29,6 @@ class MMainWindow(object):  # главное окно
         #self.lbl.setGeometry(QRect(10, 10, 200, 15))
         self.lbl.adjustSize()
         self.closeButton = QPushButton('Close', self.centralwidget)
-        #self.closeButton.setObjectName("pushButton")
         self.closeButton.resize(self.closeButton.sizeHint())
         self.closeButton.move(150, 150)
         self.closeButton.clicked.connect(QCoreApplication.instance().quit)
@@ -44,11 +36,6 @@ class MMainWindow(object):  # главное окно
         self.dobtn.resize(self.dobtn.sizeHint())
         #self.dobtn.clicked.connect(self.dodobtn)
         self.dobtn.move(150, 125)
-        #self.horizontalLayout.addWidget(self.pushButton)
-        #self.horizontalLayout.addWidget(self.lbl)
-        #self.horizontalLayout.alignment = 'bottom'
-        #self.verticalLayout.addLayout(self.horizontalLayout)
-        #self.verticalLayout.alignment = 'right'
         #self.center()  # центрировать окно приложения
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -59,6 +46,4 @@ class MMainWindow(object):  # главное окно
         qr.moveCenter(cp)  # совместить центры экрана и прямоугольника
         self.move(qr.topLeft())  # переместить окно в угол отцентрированного прямоугольника
 
-    def dodobtn(self, text):
-        self.lbl.setText(text)
 
