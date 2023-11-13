@@ -14,8 +14,6 @@ class WorkWin(QMainWindow):
         super(WorkWin, self).__init__()
         self.ui = MMainWindow()
         self.ui.setupUi(self)
-        self.ui.lbl.move(10, 10)
-        self.ui.lbl.adjustSize()
         self.ui.dobtn.clicked.connect(self.dodbtn)
 
     def dodbtn(self):
@@ -23,15 +21,28 @@ class WorkWin(QMainWindow):
         videos = ytb_get_videos_list()
         print(videos)
         print(videos[0]['snippet']['thumbnails']['default']['url'])
-#        with urllib.request.urlopen(videos[0]['snippet']['thumbnails']['default']['url']) as thumburl:
-#            preview = thumburl.read()
-        urllib.request.urlretrieve(videos[0]['snippet']['thumbnails']['default']['url'], 'default.jpg')
-        img = QPixmap('default.jpg')
-        self.ui.lbl.setPixmap(img)
-       # self.ui.lbl.setText(videos[0]['snippet']['title'])
-        self.ui.lbl.adjustSize()
-        self.ui.lbl.show()
+        urllib.request.urlretrieve(videos[0]['snippet']['thumbnails']['default']['url'], 'default1.jpg')
+        urllib.request.urlretrieve(videos[1]['snippet']['thumbnails']['default']['url'], 'default2.jpg')
+        urllib.request.urlretrieve(videos[2]['snippet']['thumbnails']['default']['url'], 'default3.jpg')
+        img1 = QPixmap('default1.jpg')
+        img2 = QPixmap('default2.jpg')
+        img3 = QPixmap('default3.jpg')
+        self.ui.thmb1.setPixmap(img1)
+        self.ui.thmb2.setPixmap(img2)
+        self.ui.thmb3.setPixmap(img3)
+        self.ui.lbl1.setText(videos[0]['snippet']['title'])
+        self.ui.lbl2.setText(videos[1]['snippet']['title'])
+        self.ui.lbl3.setText(videos[2]['snippet']['title'])
+        self.ui.thmb1.adjustSize()
+        self.ui.thmb2.adjustSize()
+        self.ui.thmb3.adjustSize()
+        self.ui.lbl1.adjustSize()
+        self.ui.lbl2.adjustSize()
+        self.ui.lbl3.adjustSize()
+        #self.ui.thmb1.show()
 
+
+    def viewbtn(self):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
